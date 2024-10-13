@@ -1,0 +1,16 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "Weather App Project to demonstrate competence in front and back end development, and displaying data received from third party APIs",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "'"
+  },
+  "author": "Mbasa Cokile",
+  "license": "ISC"
+}
