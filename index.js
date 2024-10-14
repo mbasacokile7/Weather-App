@@ -44,7 +44,11 @@ app.post("/results", async (req, res) => {
   try {
     const apiURL = "https://api.openweathermap.org/data/2.5/weather?q=" + userCity + "," + userCountryCode +"&units=metric&appid=" + apiKey;
     const response = await axios.get(apiURL);
-    console.log(response.data);
+    //Store Response Data into this variable
+    const result = response.data;
+    //Render results ejs page and convert the JS Object into a string
+    console.log(result);
+    res.render("results.ejs", {data: result});
   } catch (error) {
     console.log("There was error getting the data");
   }
