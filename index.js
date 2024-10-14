@@ -25,7 +25,7 @@ app.use(express.static("public"));
 
 // --- HTTP Requests --- //
 app.get("/", async (req, res) => {
-    res.send('We are live boi');
+    res.sendFile(__dirname + "/views/index.html");
   });
 
 
