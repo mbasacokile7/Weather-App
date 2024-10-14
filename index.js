@@ -3,6 +3,8 @@
 import express from "express";
 import bodyParser from "body-parser";
 import axios from "axios";
+import env from "dotenv"
+ 
 
 //When dealing with files, we use native node packages
 import { dirname } from "path";
@@ -11,7 +13,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 const port = 3000;
+// Initialize the env module
+env.config();
+const apiKey = process.env.API_KEY;
 
+const auth = {"appid":apiKey};
 
 app.use(bodyParser.urlencoded({extended:true}));
 
@@ -24,10 +30,25 @@ app.use(express.static("public"));
 
 
 // --- HTTP Requests --- //
+// This will render the landing page;
 app.get("/", async (req, res) => {
     res.sendFile(__dirname + "/views/index.html");
   });
 
+//Post request to view response from API call
+app.post("/results", async (req, res) => {
+  // Get data that the user entered using body-parser
+  let userCity = req.body.userCity;
+  let userCountryCode = req.body.userCountryCode;
+  //Add a try catch block to catch errors
+  try {
+    const apiURL = "https://api.openweathermap.org/data/2.5/weather?q=" + userCity + "," + userCountryCode +"&units=metric&appid=" + apiKey;
+    const response = await axios.get(apiURL);
+    console.log(response.data);
+  } catch (error) {
+    console.log("There was error getting the data");
+  }
+})
 
 //Initialise the Server on Port 3000(Can change)
 app.listen(port, ()=>{
