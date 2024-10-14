@@ -12,6 +12,17 @@ body{
     justify-content: center;
     padding-top: 40px;
     padding-bottom: 40px;
+    height: 100vh;
+}
+
+/* --- Container Styling --- */
+.container{
+    background-color: rgba(255, 255, 255, .15);  
+    backdrop-filter: blur(5px);
+    padding: 20px 0 20px 0;
+    border-radius: 25px;
+    margin: 20px 50px 20px 50px;
+    
 }
 
 /* --- Form Styling --- */
@@ -20,27 +31,57 @@ body{
     max-width: 330px;
     padding: 15px;
     margin: 0 auto;
-  }
-  .form-signin .checkbox {
+}
+.form-signin .checkbox {
     font-weight: 400;
   }
-  .form-signin .form-control {
+.form-signin .form-control {
     position: relative;
     box-sizing: border-box;
     height: auto;
     padding: 10px;
     font-size: 16px;
   }
-  .form-signin .form-control:focus {
+.form-signin .form-control:focus {
     z-index: 2;
   }
-  .form-signin input[type="email"] {
+.form-signin input[type="userCity"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
   }
-  .form-signin input[type="password"] {
+.form-signin input[type="userCountryCode"] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
+
+/* Text Styling */
+#app-title{
+    color: aliceblue;
+    font-family: "Rubik", sans-serif;
+    font-weight: 400;
+    text-shadow: 1px 2px #36454F;
+  }
+
+#app-copy{
+    color: aliceblue;
+    font-family: "Afacad Flux", sans-serif ;
+    font-size: 18px;
+    text-shadow: 1px 2px #36454F;
+}
+
+/* --- Button Styling ---*/
+.btn{
+    background-color: #1e81b0 ;
+    border: none;
+    font-family: "Rubik", sans-serif;
+    padding: 10px 15px 10px 15px;
+}
+.btn:hover{
+    background-color: #154c79 ;
+}
+
+#seven-day-btn{
+    margin-top: 8px;
+}
