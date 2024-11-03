@@ -15,13 +15,19 @@
 </head>
 <body>
     <div class="jumbotron">
-        <h1 class="display-4">Hello, world!</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-        <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-
-        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-      </div>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+        <h1 id="app-title">WeatherWise</h1>
+        <div class="container jt-container">
+          <h1 class="display-3">Oops, we couldn't get an result</h1>
+          <p class="error-copy">
+            There was an issue with either the City Name or Country Code, entered. 
+          </p>
+          <form action="/return" method="get">
+            <button id ="go-back-btn" class="btn btn-lg btn-primary btn-block" type="submit">Another Forecast</button>
+        </form>
+        <p class="mt-5 mb-3 text-muted">&copy; 2024 Mbasa Cokile</p>
+        </div>
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 </body>

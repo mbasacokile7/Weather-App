@@ -35,6 +35,11 @@ app.get("/", async (req, res) => {
     res.sendFile(__dirname + "/views/index.html");
   });
 
+// Get Request to redirect to the landing page
+app.get("/return", (req, res) =>{
+  res.redirect("/");
+});
+
 //Post request to view response from API call
 app.post("/results", async (req, res) => {
   // Get data that the user entered using body-parser
@@ -51,14 +56,12 @@ app.post("/results", async (req, res) => {
     //Render results ejs page and convert the JS Object into a string
     res.render("results.ejs", {data: result, iconURL:iconURL});
   } catch (error) {
-    console.log("There was error getting the data");
+    // Render the error page if there is an error
+    res.render("error.ejs");
   }
 })
 
-// Get Request to redirect to the landing page
-app.get("/return", (req, res) =>{
-  res.redirect("/");
-})
+
 
 // Initialise the Server on Port 3000(Can change)
 app.listen(port, ()=>{

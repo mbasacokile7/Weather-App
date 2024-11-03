@@ -116,3 +116,33 @@ body{
   font-size: 25px;
   text-shadow: 1px 2px #36454F;
 }
+
+/* ----- Error Page Styling ----- */
+/* --- Jumbotron Styling --- */
+.jumbotron{
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  border-radius: .3rem;
+}
+
+.jt-container{
+  width: 100%;
+  padding-right: 15px !important;
+  padding-left: 15px !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+/* --- Text Styling --- */
+.display-3{
+  color: aliceblue;
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+  text-shadow: 1px 2px #36454F;
+}
+
+.error-copy{
+  color: aliceblue;
+  font-family: "Afacad Flux", sans-serif ;
+  text-shadow: 1px 2px #36454F;
+}
