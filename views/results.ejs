@@ -45,21 +45,28 @@
                 </div>
             </div>
             <!-- ------ Min and Max Temp ----- -->
-            <div class="row">
-                <div id="min-temp-container" class="col-sm-6">
-                    <h4 class="min-temp temp">
-                        <%= data.main.temp_min %>
-                    </h4>
+            <% if (data.main.temp_max != data.main.temp_min ) { %>
+                <div class="row">
+                    <div id="min-temp-container" class="col-sm-6">
+                        <h4 class="min-temp temp">
+                            Min: <%= data.main.temp_min %> °C
+                        </h4>
+                    </div>
+                    <div id="max-temp-container" class="col-sm-6">
+                        <h4 class="max-temp temp">
+                            Max: <%= data.main.temp_max %> °C
+                        </h4>
+                    </div>
                 </div>
-                <div id="max-temp-container" class="col-sm-6">
-                    <h4 class="max-temp temp">
-                        <%= data.main.temp_max %>
-                    </h4>
-                </div>
-            </div>
+            <% } %>
+            
+            
          <div id="five-day container">
-
+            
          </div>
+         <form action="/return" method="get">
+            <button id ="go-back-btn" class="btn btn-lg btn-primary btn-block" type="submit">Another Forecast</button>
+        </form>
          <p class="mt-5 mb-3 text-muted">&copy; 2024 Mbasa Cokile</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

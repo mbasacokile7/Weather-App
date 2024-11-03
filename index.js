@@ -54,6 +54,11 @@ app.post("/results", async (req, res) => {
   }
 })
 
+// Get Request to redirect to the landing page
+app.get("/return", (req, res) =>{
+  res.redirect("/");
+})
+
 //Initialise the Server on Port 3000(Can change)
 app.listen(port, ()=>{
     console.log(`The server is running on Port: ${port}`);
