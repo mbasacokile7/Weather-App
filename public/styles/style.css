@@ -87,6 +87,13 @@ body{
 }
 
 /* ----- Results Page Styling ----- */
+/* --- Icon Styling -- */
+.weather-icon{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
 
 /* --- Text Styling --- */
 .current-temp{
@@ -108,5 +115,4 @@ body{
   font-family: "Afacad Flux", sans-serif ;
   font-size: 25px;
   text-shadow: 1px 2px #36454F;
-
 }

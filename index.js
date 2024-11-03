@@ -46,9 +46,10 @@ app.post("/results", async (req, res) => {
     const response = await axios.get(apiURL);
     //Store Response Data into this variable
     const result = response.data;
+    // Get URL to render icons
+    let iconURL = "http://openweathermap.org/img/wn/" + result.weather[0].icon + "@2x.png";
     //Render results ejs page and convert the JS Object into a string
-    console.log(result);
-    res.render("results.ejs", {data: result});
+    res.render("results.ejs", {data: result, iconURL:iconURL});
   } catch (error) {
     console.log("There was error getting the data");
   }
