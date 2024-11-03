@@ -14,10 +14,12 @@
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+    
     <!--Main Container-->
     <div class="container">
+        <!-- App Heading-->
+        <h1 id="app-title">WeatherWise</h1>
         <!-- Main Results Containers -->
-         <div id="current" class=" container">
             <!-- ------City Name ----- -->
             <div class="row">
                 <div id="city-name-container" class="col-sm">
@@ -30,7 +32,7 @@
             <div class="row">
                 <div id="current-temp-container" class="col-sm">
                     <h1 class="current-temp">
-                        <%= data.main.temp %>
+                        <%= data.main.temp %> °C
                     </h1>
                 </div>
             </div>
@@ -55,7 +57,6 @@
                     </h4>
                 </div>
             </div>
-         </div>
          <div id="five-day container">
 
          </div>

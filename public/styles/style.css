@@ -85,3 +85,28 @@ body{
 #seven-day-btn{
     margin-top: 8px;
 }
+
+/* ----- Results Page Styling ----- */
+
+/* --- Text Styling --- */
+.current-temp{
+  color: aliceblue;
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+  text-shadow: 1px 2px #36454F;
+}
+
+.temp-description, .temp{
+  color: aliceblue;
+  font-family: "Afacad Flux", sans-serif ;
+  font-size: 18px;
+  text-shadow: 1px 2px #36454F;
+}
+
+.city{
+  color: aliceblue;
+  font-family: "Afacad Flux", sans-serif ;
+  font-size: 25px;
+  text-shadow: 1px 2px #36454F;
+
+}
