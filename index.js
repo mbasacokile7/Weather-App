@@ -47,17 +47,29 @@ app.post("/results", async (req, res) => {
   let userCountryCode = req.body.userCountryCode;
   //Add a try catch block to catch errors
   try {
+    // API URL to get Current Weather forecast
     const apiURL = "https://api.openweathermap.org/data/2.5/weather?q=" + userCity + "," + userCountryCode +"&units=metric&appid=" + apiKey;
-    const response = await axios.get(apiURL);
-    //Store Response Data into this variable
+    // API URL for 5 Day forecast
+    const apiURL_2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + userCity + "," + userCountryCode + "&units=metric&appid=" + apiKey;
+    // Use Promise.all() to make parallel requests, to make the app fast
+    const [response, response_2] = await Promise.all([
+      axios.get(apiURL),
+      axios.get(apiURL_2)
+    ]);
+    //Store Current Temp forecast data
     const result = response.data;
     // Get URL to render icons
     let iconURL = "http://openweathermap.org/img/wn/" + result.weather[0].icon + "@2x.png";
+   
+    //Store 5 Day Forecast data
+    const result_2 = response_2.data
+    console.log(result_2);
     //Render results ejs page and convert the JS Object into a string
     res.render("results.ejs", {data: result, iconURL:iconURL});
   } catch (error) {
     // Render the error page if there is an error
     res.render("error.ejs");
+    console.log(error);
   }
 })
 
