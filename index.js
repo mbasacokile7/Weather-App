@@ -44,11 +44,11 @@ app.get("/return", (req, res) =>{
 const averageTemps = {dayOne: [], dayTwo: [], dayThree: [], dayFour: [], dayFive:[]};
 // JS Object to store average temp values.
 const dailyAvgTemps = {
-                       dayOne: {avgTemp:0 , avgMinTemp:0, avgMaxTemp:0},
-                       dayTwo: {avgTemp:0 , avgMinTemp:0, avgMaxTemp:0},
-                       dayThree: {avgTemp:0 , avgMinTemp:0, avgMaxTemp:0},
-                       dayFour: {avgTemp:0 , avgMinTemp:0, avgMaxTemp:0},
-                       dayFive:{avgTemp:0 , avgMinTemp:0, avgMaxTemp:0}
+                       dayOne: {dayOfWeek: "" , dayDate: "", avgTemp:0 , avgMinTemp:0, avgMaxTemp:0},
+                       dayTwo: {dayOfWeek: "", dayDate: "", avgTemp:0 , avgMinTemp:0, avgMaxTemp:0},
+                       dayThree: {dayOfWeek: "", dayDate: "", avgTemp:0 , avgMinTemp:0, avgMaxTemp:0},
+                       dayFour: {dayOfWeek: "", dayDate: "", avgTemp:0 , avgMinTemp:0, avgMaxTemp:0},
+                       dayFive:{dayOfWeek: "", dayDate: "", avgTemp:0 , avgMinTemp:0, avgMaxTemp:0}
                       }
 // Create a function to extract certain data for 5-day forecast
 let count = 0;
@@ -93,6 +93,7 @@ function dataRetrieval(data){
     })
     return sum
   }
+  // TODO: Refactor the code. Its repetitive, and can be condensed to have more elegant code.
   // Get the average temp, and the average max and min : DAY ONE
   dailyAvgTemps.dayOne.avgTemp = (Math.round(findSum(averageTemps.dayOne)/averageTemps.dayOne.length)*100)/100;
   dailyAvgTemps.dayOne.avgMaxTemp = Math.round(Math.max(...averageTemps.dayOne)*100)/100;
