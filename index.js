@@ -42,44 +42,84 @@ app.get("/return", (req, res) =>{
 
 // Create an object to store all the average temp values for each day
 const averageTemps = {dayOne: [], dayTwo: [], dayThree: [], dayFour: [], dayFive:[]};
+// JS Object to store average temp values.
+const dailyAvgTemps = {
+                       dayOne: {avgTemp:0 , avgMinTemp:0, avgMaxTemp:0},
+                       dayTwo: {avgTemp:0 , avgMinTemp:0, avgMaxTemp:0},
+                       dayThree: {avgTemp:0 , avgMinTemp:0, avgMaxTemp:0},
+                       dayFour: {avgTemp:0 , avgMinTemp:0, avgMaxTemp:0},
+                       dayFive:{avgTemp:0 , avgMinTemp:0, avgMaxTemp:0}
+                      }
 // Create a function to extract certain data for 5-day forecast
 let count = 0;
 function dataRetrieval(data){
   // Loop through the data arrray(data.List)
   
   for (let item in data){
-    count++
-    //Get the date of each data entry/timestamp
-    const dateTime = new Date(data[item].dt_txt);
-    //Get the specific date
-    const date = dateTime.getDate();
-    //console.log(date);
+    //Get the date of each data entry/timestamp Conditional varibale
+    const date = new Date(data[item].dt_txt).getDate();
+    // Get current date 
+    const currentDate = new Date(data[0].dt_txt).getDate();
     // Use Switch Statement to execute certain codeblocks
-    switch (new Date(data[item].dt_txt).getDate()) {
-      case (date):
-        console.log("Day One")
-        averageTemps.dayOne.push(data[item].main.temp);
-        break;
-      case (date + 1):
-        console.log("Day Two")
+    switch (date) {
+      case (currentDate + 1):
+        // Day 2
         averageTemps.dayTwo.push(data[item].main.temp);
         break;
-      case date + 2:
-        console.log("Day Three")
+      case (currentDate + 2):
+        // Day 3
         averageTemps.dayThree.push(data[item].main.temp);
         break;
-      case (date + 3):
-        console.log("Day Four")
+      case (currentDate + 3):
+        // Day 4
         averageTemps.dayFour.push(data[item].main.temp);
         break;
-      case (date + 4):
-        console.log("Day Five")
+      case (currentDate + 4):
+        // Day 5
         averageTemps.dayFive.push(data[item].main.temp);
         break;
+      default:
+        averageTemps.dayOne.push(data[item].main.temp);
     }
   }
-  console.log(count)
- return averageTemps
+
+  // Variable to initialize sum
+  let sum = null;
+  //Function to fimd the sum of an array
+  function findSum(array){
+    sum = 0
+    array.forEach(num =>{
+      sum += num;
+    })
+    return sum
+  }
+  // Get the average temp, and the average max and min : DAY ONE
+  dailyAvgTemps.dayOne.avgTemp = (Math.round(findSum(averageTemps.dayOne)/averageTemps.dayOne.length)*100)/100;
+  dailyAvgTemps.dayOne.avgMaxTemp = Math.round(Math.max(...averageTemps.dayOne)*100)/100;
+  dailyAvgTemps.dayOne.avgMinTemp = Math.round(Math.min(...averageTemps.dayOne)*100)/100;
+        
+  // Get the average temp, and the average max and min : DAY TWO
+  dailyAvgTemps.dayTwo.avgTemp = Math.round((findSum(averageTemps.dayTwo)/averageTemps.dayTwo.length)*100)/100;
+  dailyAvgTemps.dayTwo.avgMaxTemp = Math.round(Math.max(...averageTemps.dayTwo)*100)/100;
+  dailyAvgTemps.dayTwo.avgMinTemp = Math.round(Math.min(...averageTemps.dayTwo)*100)/100;
+  
+  // Get the average temp, and the average max and min : DAY THREE
+  dailyAvgTemps.dayThree.avgTemp = Math.round((findSum(averageTemps.dayThree)/averageTemps.dayThree.length)*100)/100;
+  dailyAvgTemps.dayThree.avgMaxTemp = Math.round(Math.max(...averageTemps.dayThree)*100)/100;
+  dailyAvgTemps.dayThree.avgMinTemp = Math.round(Math.min(...averageTemps.dayThree)*100)/100;
+        
+  // Get the average temp, and the average max and min : DAY FOUR
+  dailyAvgTemps.dayFour.avgTemp = Math.round((findSum(averageTemps.dayFour)/averageTemps.dayFour.length)*100)/100;
+  dailyAvgTemps.dayFour.avgMaxTemp = Math.round(Math.max(...averageTemps.dayFour)*100)/100;
+  dailyAvgTemps.dayFour.avgMinTemp = Math.round(Math.min(...averageTemps.dayFour)*100)/100;
+       
+  // Get the average temp, and the average max and min : DAY FIVE
+  dailyAvgTemps.dayFive.avgTemp = Math.round((findSum(averageTemps.dayFive)/averageTemps.dayFive.length)*100)/100;
+  dailyAvgTemps.dayFive.avgMaxTemp = Math.round(Math.max(...averageTemps.dayFive)*100)/100;
+  dailyAvgTemps.dayFive.avgMinTemp = Math.round(Math.min(...averageTemps.dayFive)*100)/100;
+   
+  // Return the Dailiy Average Temp Readings
+ return dailyAvgTemps
 }
 
 //Post request to view response from API call
@@ -102,12 +142,13 @@ app.post("/results", async (req, res) => {
     const result = response.data;
     // Get URL to render icons
     let iconURL = "http://openweathermap.org/img/wn/" + result.weather[0].icon + "@2x.png";
-   
     //Store 5 Day Forecast data
     const result_2 = response_2.data
+
     //Apply data retrieval function to get desired temps
     const dailyTemps = dataRetrieval(result_2.list);
-    //console.log(dailyTemps);
+    console.log(dailyTemps);
+
     //Render results ejs page and convert the JS Object into a string
     res.render("results.ejs", {data: result, iconURL:iconURL});
   } catch (error) {
