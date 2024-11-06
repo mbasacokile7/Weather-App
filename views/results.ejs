@@ -73,40 +73,38 @@
         </form>
         <!-------- 5-Day Forecast -------->
         <div class="row five-day-container">
-            <%# for (let column = 0; column < 5 ; column ++){ %>
-
-
-            <%# } %>
-            <!---- Column  ---->
-            <div class="col single-day">
+            <% for (let day in dailyTemps) { %>
+                <!---- Column  ---->
+                <div class="col single-day">
                 <!-- Day of the week-->
-                <h1 id="day-of-week" class="forecast-data">
-
-                </h1>
+                    <h1 id="day-of-week" class="forecast-data">
+                        <%= dailyTemps[day].dayOfWeek %>
+                    </h1>
                 <!-- Date -->
-                <h3 id="date" class="forecast-data">
-
-                </h3>
+                    <h3 id="date" class="forecast-data">
+                        <%= dailyTemps[day].dayDate%>
+                    </h3>
                 <!-- Average Temp Forecast-->
-                <h1 class="current-temp">
-                                   °C
-                </h1>
+                    <h1 class="current-temp">
+                        <%= dailyTemps[day].avgTemp %> °C
+                    </h1>
                 <!-- Average Min and Max Temsps-->
-                <div class="row">
-                    <div id="min-temp-container" class="col-sm-6">
-                        <h4 class="min-temp temp">
-                            Min: °C
-                        </h4>
-                    </div>
-                    <div id="max-temp-container" class="col-sm-6">
-                        <h4 class="max-temp temp">
-                            Max:  °C
-                        </h4>
+                    <div class="row">
+                        <div id="min-temp-container" class="col-sm-6">
+                            <h4 class="min-temp temp">
+                                Min: <%= dailyTemps[day].avgMinTemp %> °C
+                            </h4>
+                        </div>
+                        <div id="max-temp-container" class="col-sm-6">
+                            <h4 class="max-temp temp">
+                                Max: <%= dailyTemps[day].avgMaxTemp %> °C
+                            </h4>
+                        </div>
                     </div>
                 </div>
 
-
-            </div>
+            <% } %>
+            
 
         </div>
          <p class="mt-5 mb-3 text-muted">&copy; 2024 Mbasa Cokile</p>

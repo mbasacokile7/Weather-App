@@ -50,10 +50,34 @@ const dailyAvgTemps = {
                        dayFour: {dayOfWeek: "", dayDate: "", avgTemp:0 , avgMinTemp:0, avgMaxTemp:0},
                        dayFive:{dayOfWeek: "", dayDate: "", avgTemp:0 , avgMinTemp:0, avgMaxTemp:0}
                       }
+
+// Create a function to get the dates
+let forecastDates = [];
+let forecastDays = []
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+const daysofWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+function getDates(data){
+  for(const item in data){
+    const day = daysofWeek[new Date(data[item].dt_txt).getDay()]
+    const date = new Date(data[item].dt_txt).getDate() ;
+    const month = new Date(data[item].dt_txt).getMonth() ;
+    const year = new Date(data[item].dt_txt).getFullYear();
+    const finalDate = date + " " + months[month] + " " +year;
+    if(!forecastDates.includes(finalDate) || !forecastDays.includes(day)){
+      forecastDates.push(finalDate);
+      forecastDays.push(day);
+    } else{ 
+      continue;
+      
+    }
+  }
+  return [forecastDates, forecastDays]
+}
 // Create a function to extract certain data for 5-day forecast
 let count = 0;
 function dataRetrieval(data){
   // Loop through the data arrray(data.List)
+  const [forecastDates, forecastDays] = getDates(data);
   
   for (let item in data){
     //Get the date of each data entry/timestamp Conditional varibale
@@ -98,26 +122,36 @@ function dataRetrieval(data){
   dailyAvgTemps.dayOne.avgTemp = (Math.round(findSum(averageTemps.dayOne)/averageTemps.dayOne.length)*100)/100;
   dailyAvgTemps.dayOne.avgMaxTemp = Math.round(Math.max(...averageTemps.dayOne)*100)/100;
   dailyAvgTemps.dayOne.avgMinTemp = Math.round(Math.min(...averageTemps.dayOne)*100)/100;
+  dailyAvgTemps.dayOne.dayDate = forecastDates[1]
+  dailyAvgTemps.dayOne.dayOfWeek = forecastDays[1]
         
   // Get the average temp, and the average max and min : DAY TWO
   dailyAvgTemps.dayTwo.avgTemp = Math.round((findSum(averageTemps.dayTwo)/averageTemps.dayTwo.length)*100)/100;
   dailyAvgTemps.dayTwo.avgMaxTemp = Math.round(Math.max(...averageTemps.dayTwo)*100)/100;
   dailyAvgTemps.dayTwo.avgMinTemp = Math.round(Math.min(...averageTemps.dayTwo)*100)/100;
+  dailyAvgTemps.dayTwo.dayDate = forecastDates[2]
+  dailyAvgTemps.dayTwo.dayOfWeek = forecastDays[2]
   
   // Get the average temp, and the average max and min : DAY THREE
   dailyAvgTemps.dayThree.avgTemp = Math.round((findSum(averageTemps.dayThree)/averageTemps.dayThree.length)*100)/100;
   dailyAvgTemps.dayThree.avgMaxTemp = Math.round(Math.max(...averageTemps.dayThree)*100)/100;
   dailyAvgTemps.dayThree.avgMinTemp = Math.round(Math.min(...averageTemps.dayThree)*100)/100;
+  dailyAvgTemps.dayThree.dayDate = forecastDates[3]
+  dailyAvgTemps.dayThree.dayOfWeek = forecastDays[3]
         
   // Get the average temp, and the average max and min : DAY FOUR
   dailyAvgTemps.dayFour.avgTemp = Math.round((findSum(averageTemps.dayFour)/averageTemps.dayFour.length)*100)/100;
   dailyAvgTemps.dayFour.avgMaxTemp = Math.round(Math.max(...averageTemps.dayFour)*100)/100;
   dailyAvgTemps.dayFour.avgMinTemp = Math.round(Math.min(...averageTemps.dayFour)*100)/100;
+  dailyAvgTemps.dayFour.dayDate = forecastDates[4]
+  dailyAvgTemps.dayFour.dayOfWeek = forecastDays[4]
        
   // Get the average temp, and the average max and min : DAY FIVE
   dailyAvgTemps.dayFive.avgTemp = Math.round((findSum(averageTemps.dayFive)/averageTemps.dayFive.length)*100)/100;
   dailyAvgTemps.dayFive.avgMaxTemp = Math.round(Math.max(...averageTemps.dayFive)*100)/100;
   dailyAvgTemps.dayFive.avgMinTemp = Math.round(Math.min(...averageTemps.dayFive)*100)/100;
+  dailyAvgTemps.dayFive.dayDate = forecastDates[5]
+  dailyAvgTemps.dayFive.dayOfWeek = forecastDays[5]
    
   // Return the Dailiy Average Temp Readings
  return dailyAvgTemps
@@ -151,7 +185,7 @@ app.post("/results", async (req, res) => {
     console.log(dailyTemps);
 
     //Render results ejs page and convert the JS Object into a string
-    res.render("results.ejs", {data: result, iconURL:iconURL});
+    res.render("results.ejs", {data: result, iconURL:iconURL, dailyTemps: dailyTemps});
   } catch (error) {
     // Render the error page if there is an error
     res.render("error.ejs");
