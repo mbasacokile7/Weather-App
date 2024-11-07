@@ -12,10 +12,11 @@ import { fileURLToPath } from "url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
-const port = 3000;
-// Initialize the env module
+
+// Initialize the env module and define environment variables
 env.config();
 const apiKey = process.env.API_KEY;
+const port = process.env.PORT;
 
 const auth = {"appid":apiKey};
 
