@@ -22,6 +22,9 @@ const auth = {"appid":apiKey};
 
 app.use(bodyParser.urlencoded({extended:true}));
 
+// Set the view engine
+app.set('view engine', 'ejs');
+
 //Allow express to access the static
 app.use(express.static("public"));
 
