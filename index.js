@@ -16,7 +16,7 @@ const app = express();
 // Initialize the env module and define environment variables
 env.config();
 const apiKey = process.env.API_KEY;
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 const auth = {"appid":apiKey};
 
